@@ -7,59 +7,50 @@ class Movie:
         self.year = year
         self.genre = genre
 
+    def __repr__(self) -> str:
+        return f"Movie(title='{self.title}', year={self.year}, genre='{self.genre}')"
+
 class MovieCollection:
 
     def __init__(self):
         self.movies: Dict[str, Movie] = {}
 
-    def add_movie(self, movie: Movie):
+    def add_movie(self, movie: Movie) -> None:
         self.movies[movie.title] = movie
         print(f"Добавлен фильм: {movie.title}")
 
-    def remove_movie(self, title: str):
+    def get_movie_collection(self) -> List[str]:
+        """Возвращает список описаний фильмов в коллекции"""
+        if not self.movies:
+            return ["Коллекция фильмов пуста."]
+        return [repr(movie) for movie in self.movies.values()]
+
+    def remove_movie(self, title: str) -> None:
         if title in self.movies:
             removed_movie = self.movies.pop(title)
             print(f"Фильм удалён: {removed_movie.title}")
         else:
             print(f"Фильм под названием '{title}' не найден")
 
-    def search_movies_by_attribute(self, attribute: str, value):
+    def search_movies_by_attribute(self, attribute: str, value) -> List:
         """Универсальный метод для поиска фильмов по заданному атрибуту."""
         return [movie for movie in self.movies.values() if getattr(movie, attribute) == value]
 
-    def search_movies_year(self, year: int):
+    def search_movies_year(self, year: int) -> List:
         return self.search_movies_by_attribute('year', year)
 
-    def search_movies_genre(self, genre: str):
+    def search_movies_genre(self, genre: str) -> List:
         return self.search_movies_by_attribute('genre', genre)
 
-    def search_movies_title(self, title: str):
+    def search_movies_title(self, title: str) -> List:
         return self.search_movies_by_attribute('title', title)
 
+    def __iter__(self) -> Iterator[Movie]:
+        return iter(self.movies.values())
 
-    def add_movie_collection(self):
-        pass
 
-    def remove_movie_from_collection(self):
-        pass
 
-if __name__ == "__main__":
-    main_collection = MovieCollection()
 
-    # Добавляем фильмы
-    main_collection.add_movie(Movie(title="pulp fiction", year=1994, genre="Action"))
-    main_collection.add_movie(Movie(title="another", year=1994, genre="Action"))
-    main_collection.add_movie(Movie(title="Matrix", year=1999, genre="Action"))
-    main_collection.add_movie(Movie(title="Interstellar", year=2014, genre="Action"))
 
-    main_collection.remove_movie("Matrix")
 
-    year_movie = main_collection.search_movies_year(year = 1994)
-    print("Найдены такие фильмы:")
-    for item in year_movie:
-        print(f"{item.title}")
 
-    title_movie = main_collection.search_movies_title(title="Interstellar")
-    print("Найдены такие фильмы:")
-    for item in title_movie:
-        print(f"{item.title}")
