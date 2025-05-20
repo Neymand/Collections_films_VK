@@ -23,8 +23,27 @@ class MovieCollection:
         else:
             print(f"Фильм под названием '{title}' не найден")
 
-    def search_movies(self):
-        pass
+    def search_movies_year(self, year: int):
+        results = []
+        for movie in self.movies.values():
+            if movie.year == year:
+                results.append(movie)
+        return results
+
+    def search_movies_genre(self, genre: str):
+        results = []
+        for movie in self.movies.values():
+            if movie.genre == genre:
+                results.append(movie)
+        return results
+
+    def search_movies_title(self, title: str):
+        results = []
+        for movie in self.movies.values():
+            if movie.title == title:
+                results.append(movie)
+        return results
+
 
     def add_movie_collection(self):
         pass
@@ -37,7 +56,18 @@ class MovieCollection:
 #
 #     # Добавляем фильмы
 #     main_collection.add_movie(Movie(title="pulp fiction", year=1994, genre="Action"))
+#     main_collection.add_movie(Movie(title="another", year=1994, genre="Action"))
 #     main_collection.add_movie(Movie(title="Matrix", year=1999, genre="Action"))
 #     main_collection.add_movie(Movie(title="Interstellar", year=2014, genre="Action"))
 #
 #     main_collection.remove_movie("Matrix")
+#
+#     year_movie = main_collection.search_movies_year(year = 1994)
+#     print("Найдены такие фильмы:")
+#     for item in year_movie:
+#         print(f"{item.title}")
+#
+#     title_movie = main_collection.search_movies_title(title="Interstellar")
+#     print("Найдены такие фильмы:")
+#     for item in title_movie:
+#         print(f"{item.title}")
