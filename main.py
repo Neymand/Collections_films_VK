@@ -23,26 +23,18 @@ class MovieCollection:
         else:
             print(f"Фильм под названием '{title}' не найден")
 
+    def search_movies_by_attribute(self, attribute: str, value):
+        """Универсальный метод для поиска фильмов по заданному атрибуту."""
+        return [movie for movie in self.movies.values() if getattr(movie, attribute) == value]
+
     def search_movies_year(self, year: int):
-        results = []
-        for movie in self.movies.values():
-            if movie.year == year:
-                results.append(movie)
-        return results
+        return self.search_movies_by_attribute('year', year)
 
     def search_movies_genre(self, genre: str):
-        results = []
-        for movie in self.movies.values():
-            if movie.genre == genre:
-                results.append(movie)
-        return results
+        return self.search_movies_by_attribute('genre', genre)
 
     def search_movies_title(self, title: str):
-        results = []
-        for movie in self.movies.values():
-            if movie.title == title:
-                results.append(movie)
-        return results
+        return self.search_movies_by_attribute('title', title)
 
 
     def add_movie_collection(self):
@@ -51,23 +43,23 @@ class MovieCollection:
     def remove_movie_from_collection(self):
         pass
 
-# if __name__ == "__main__":
-#     main_collection = MovieCollection()
-#
-#     # Добавляем фильмы
-#     main_collection.add_movie(Movie(title="pulp fiction", year=1994, genre="Action"))
-#     main_collection.add_movie(Movie(title="another", year=1994, genre="Action"))
-#     main_collection.add_movie(Movie(title="Matrix", year=1999, genre="Action"))
-#     main_collection.add_movie(Movie(title="Interstellar", year=2014, genre="Action"))
-#
-#     main_collection.remove_movie("Matrix")
-#
-#     year_movie = main_collection.search_movies_year(year = 1994)
-#     print("Найдены такие фильмы:")
-#     for item in year_movie:
-#         print(f"{item.title}")
-#
-#     title_movie = main_collection.search_movies_title(title="Interstellar")
-#     print("Найдены такие фильмы:")
-#     for item in title_movie:
-#         print(f"{item.title}")
+if __name__ == "__main__":
+    main_collection = MovieCollection()
+
+    # Добавляем фильмы
+    main_collection.add_movie(Movie(title="pulp fiction", year=1994, genre="Action"))
+    main_collection.add_movie(Movie(title="another", year=1994, genre="Action"))
+    main_collection.add_movie(Movie(title="Matrix", year=1999, genre="Action"))
+    main_collection.add_movie(Movie(title="Interstellar", year=2014, genre="Action"))
+
+    main_collection.remove_movie("Matrix")
+
+    year_movie = main_collection.search_movies_year(year = 1994)
+    print("Найдены такие фильмы:")
+    for item in year_movie:
+        print(f"{item.title}")
+
+    title_movie = main_collection.search_movies_title(title="Interstellar")
+    print("Найдены такие фильмы:")
+    for item in title_movie:
+        print(f"{item.title}")
