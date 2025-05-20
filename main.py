@@ -10,10 +10,11 @@ class Movie:
 class MovieCollection:
 
     def __init__(self):
-        pass
+        self.movies: Dict[str, Movie] = {}
 
-    def add_movie(self):
-        pass
+    def add_movie(self, movie: Movie):
+        self.movies[movie.title] = movie
+        print(f"Добавлен фильм: {movie.title}")
 
     def remove_movie(self):
         pass
@@ -26,3 +27,11 @@ class MovieCollection:
 
     def remove_movie_from_collection(self):
         pass
+
+# if __name__ == "__main__":
+#     main_collection = MovieCollection()
+#
+#     # Добавляем фильмы
+#     main_collection.add_movie(Movie(title="pulp fiction", year=1994, genre="Action"))
+#     main_collection.add_movie(Movie(title="Matrix", year=1999, genre="Action"))
+#     main_collection.add_movie(Movie(title="Interstellar", year=2014, genre="Action"))
