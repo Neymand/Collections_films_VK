@@ -16,8 +16,12 @@ class MovieCollection:
         self.movies[movie.title] = movie
         print(f"Добавлен фильм: {movie.title}")
 
-    def remove_movie(self):
-        pass
+    def remove_movie(self, title: str):
+        if title in self.movies:
+            removed_movie = self.movies.pop(title)
+            print(f"Фильм удалён: {removed_movie.title}")
+        else:
+            print(f"Фильм под названием '{title}' не найден")
 
     def search_movies(self):
         pass
@@ -35,3 +39,5 @@ class MovieCollection:
 #     main_collection.add_movie(Movie(title="pulp fiction", year=1994, genre="Action"))
 #     main_collection.add_movie(Movie(title="Matrix", year=1999, genre="Action"))
 #     main_collection.add_movie(Movie(title="Interstellar", year=2014, genre="Action"))
+#
+#     main_collection.remove_movie("Matrix")
